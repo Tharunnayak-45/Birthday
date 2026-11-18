@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Dear Honey — A Celebration of Your Good Heart</title>
+    <!-- Tailwind CSS for responsive layout and utilities -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display, Cormorant Garamond, Dancing Script, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'Georgia', 'serif'],
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        script: ['"Dancing Script"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        rosePetal: '#fff7f7',
+                        blushSoft: '#fdeaea',
+                        roseGold: '#d88c9a',
+                        deepRose: '#9e3f52',
+                        warmPaper: '#fffdf9',
+                        inkCharcoal: '#2c2224',
+                        champagneGold: '#c99b5e',
+                        brightGold: '#f3d08a',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Linked External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="antialiased selection:bg-rose-200 selection:text-rose-900">
+
+    <!-- Background Ambient Canvas (Floating Balloons, Rose Petals & Golden Sparkles) -->
+    <canvas id="ambient-bg-canvas"></canvas>
+
+    <!-- Foreground Celebration Canvas (Confetti, Fireworks & Heart Bursts) -->
+    <canvas id="celebration-canvas"></canvas>
+
+    <!-- Floating Top Controls (Happy Birthday Music Box) -->
+    <header class="fixed top-4 right-4 z-50 flex items-center gap-2.5">
+        <button id="music-btn" onclick="toggleBirthdayMusic()"
+            class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/90 backdrop-blur-md border border-amber-300/80 shadow-md hover:shadow-lg text-deepRose text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer">
+            <span id="music-icon" class="text-base">🎵</span>
+            <span id="music-text">Play Birthday Melody</span>
+        </button>
+    </header>
+
+    <!-- Toast Notification Banner -->
+    <div id="toast-banner"
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 translate-y-4">
+        <div
+            class="bg-inkCharcoal/95 text-white px-5 py-3 rounded-full shadow-2xl text-sm font-medium flex items-center gap-2.5 backdrop-blur-md border border-amber-300/30">
+            <span id="toast-icon">🎂</span>
+            <span id="toast-msg">Happy Birthday, Dear Honey!</span>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- STAGE 1: MAGICAL 3D BIRTHDAY GIFT ENVELOPE LANDING SCREEN             -->
+    <!-- ===================================================================== -->
+    <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-10">
+
+        <section id="landing-envelope-stage" class="w-full max-w-xl mx-auto text-center transition-all duration-700">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-amber-300/70 shadow-xs mb-4 animate-float-slow">
+                <span class="text-sm">✨</span>
+                <span class="text-xs uppercase tracking-[0.26em] text-champagneGold font-bold">A Special Birthday
+                    Keepsake</span>
+                <span class="text-sm">✨</span>
+            </div>
+
+            <h1 class="font-script text-5xl sm:text-7xl text-deepRose mb-3 drop-shadow-xs">
+                Happy Birthday, Honey
+            </h1>
+            <p class="font-serif italic text-lg sm:text-xl text-inkCharcoal/75 mb-8">
+                For the prettiest, kindest, and most good-hearted soul
+            </p>
+
+            <!-- 3D Interactive Envelope Stage -->
+            <div id="envelope-wrapper" onclick="openBirthdayEnvelope()"
+                class="envelope-stage-wrapper group relative mx-auto w-full max-w-md cursor-pointer select-none">
+                <div
+                    class="birthday-envelope relative w-full h-72 sm:h-80 rounded-3xl bg-gradient-to-br from-[#fceaea] to-[#f8d7dc] shadow-[0_22px_50px_rgba(158,63,82,0.2)] border border-amber-300/70 flex flex-col items-center justify-center overflow-visible">
+
+                    <!-- Inner Gold-Trimmed Card Peek with Rising Portrait Preview -->
+                    <div
+                        class="envelope-inner-card absolute inset-x-6 top-4 bottom-4 bg-warmPaper rounded-2xl shadow-inner border border-amber-200/90 flex flex-col items-center justify-start pt-3.5 px-4 z-10">
+                        <div
+                            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 bg-gradient-to-tr from-champagneGold to-brightGold shadow-md overflow-hidden mb-1">
+                            <img src="profile4.jpg"
+                                onerror="this.onerror=null; this.src='https://placehold.co/200x200/fdeaea/9e3f52?text=Honey';"
+                                alt="Dear Honey" class="w-full h-full object-cover object-top rounded-full">
+                        </div>
+                        <span
+                            class="font-display text-[10px] uppercase tracking-[0.24em] text-champagneGold font-semibold">Happy
+                            Birthday</span>
+                        <span class="font-script text-2xl sm:text-3xl text-deepRose/85 leading-none mt-0.5">Dear
+                            Honey...</span>
+                    </div>
+
+                    <!-- Envelope Geometric Folds (SVG) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none rounded-3xl z-20"
+                        viewBox="0 0 400 275" preserveAspectRatio="none">
+                        <polygon points="0,0 205,148 0,275" fill="#fce8e8" opacity="0.94" />
+                        <polygon points="400,0 195,148 400,275" fill="#f9dfe2" opacity="0.94" />
+                        <polygon points="0,275 200,132 400,275" fill="#fff4f4" />
+                        <polyline points="0,275 200,132 400,275" fill="none" stroke="#e4b892" stroke-width="1.8" />
+                    </svg>
+
+                    <!-- Top Envelope Flap -->
+                    <div
+                        class="envelope-top-flap absolute inset-x-0 top-0 h-full bg-gradient-to-b from-[#f6d3d8] to-[#fceaea] border-b-2 border-amber-300/70 shadow-md pointer-events-none rounded-t-3xl z-20">
+                    </div>
+
+                    <!-- Golden Birthday Wax Seal -->
+                    <div class="relative z-30 flex flex-col items-center mt-8">
+                        <button type="button" aria-label="Open Birthday Letter"
+                            class="gold-wax-seal w-24 h-24 rounded-full flex flex-col items-center justify-center border-4 border-amber-100/90 cursor-pointer shadow-xl">
+                            <span class="font-display text-4xl text-white font-bold leading-none drop-shadow">H</span>
+                            <span
+                                class="font-script text-base text-amber-100 font-bold leading-none mt-0.5 drop-shadow">Open</span>
+                        </button>
+                        <span
+                            class="mt-4 px-5 py-2 rounded-full bg-white/95 text-deepRose text-xs font-bold tracking-wider uppercase shadow-md border border-amber-200 group-hover:bg-deepRose group-hover:text-white transition-colors duration-300">
+                            Tap Seal to Open Your Birthday Surprise
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-6 text-xs text-inkCharcoal/60">
+                Tap the golden seal for confetti, music & your birthday letter ✨
+            </p>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- STAGE 2: COMPLETE BIRTHDAY LETTER, HERO PORTRAIT, CAKE & GALLERY      -->
+        <!-- ===================================================================== -->
+        <article id="birthday-content-stage" class="hidden w-full max-w-5xl mx-auto space-y-14 pb-24 pt-4">
+
+            <!-- Top Celebratory Banner -->
+            <div class="text-center space-y-2 pt-4">
+                <span
+                    class="inline-block px-4 py-1 rounded-full bg-white/90 border border-amber-300/80 text-champagneGold text-xs font-bold uppercase tracking-[0.25em] shadow-xs">
+                    ✨ Celebrating You Today & Always ✨
+                </span>
+                <h1 class="font-script text-5xl sm:text-7xl text-deepRose drop-shadow-xs">
+                    Happy Birthday, Dear Honey!
+                </h1>
+            </div>
+
+            <!-- 1. FEATURED BIRTHDAY LETTER + HERO PORTRAIT FRAME -->
+            <section
+                class="stationery-paper relative rounded-3xl p-6 sm:p-10 md:p-14 shadow-[0_24px_65px_rgba(158,63,82,0.15)] border border-amber-200/90 overflow-hidden">
+
+                <!-- Decorative Corner Gold Flourishes -->
+                <svg class="absolute top-0 right-0 w-36 h-36 text-amber-400/25 pointer-events-none"
+                    viewBox="0 0 100 100" fill="currentColor">
+                    <path
+                        d="M100,0 C68,6 54,26 48,52 C74,46 94,32 100,0 Z M78,0 C58,16 48,36 42,62 C64,52 78,32 78,0 Z" />
+                </svg>
+                <svg class="absolute bottom-0 left-0 w-36 h-36 text-rose-400/20 pointer-events-none rotate-180"
+                    viewBox="0 0 100 100" fill="currentColor">
+                    <path
+                        d="M100,0 C68,6 54,26 48,52 C74,46 94,32 100,0 Z M78,0 C58,16 48,36 42,62 C64,52 78,32 78,0 Z" />
+                </svg>
+
+                <!-- Letter Header -->
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-amber-200/80 pb-6 mb-8 gap-3">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.25em] text-champagneGold font-bold">A Birthday
+                            Tribute To Your Beautiful Soul</span>
+                        <h2 contenteditable="true" class="font-script text-4xl sm:text-5xl text-deepRose mt-1">Dear
+                            Honey,</h2>
+                    </div>
+                    <div class="flex items-center gap-2 text-left sm:text-right">
+                        <span
+                            class="text-xs bg-rosePetal text-deepRose px-3 py-1.5 rounded-full border border-rose-200 font-medium">
+                            ✏️ Click any paragraph to customize
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Grid: Hero Portrait Showcase + Staggered Animated Birthday Letter -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+
+                    <!-- Left / Top: Featured Golden Birthday Portrait Frame -->
+                    <div class="lg:col-span-5 flex flex-col items-center">
+                        <div id="hero-portrait-frame"
+                            class="golden-portrait-frame w-full max-w-xs sm:max-w-sm rounded-2xl relative group">
+                            <div id="hero-photo-container"
+                                class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-gradient-to-br from-[#fff5f5] via-[#fdeaea] to-[#fdf3e7] flex flex-col items-center justify-center text-center cursor-pointer transition-all">
+
+                                <!-- Featured Portrait -->
+                                <img id="hero-photo-img" src="profile4.jpg"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x750/fdeaea/9e3f52?text=Birthday+Queen+Honey';"
+                                    onclick="openPhotoLightbox(this.src, 'Birthday Queen — That Pure, Good-Hearted Smile 💖')"
+                                    alt="Birthday Queen Honey"
+                                    class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+
+                                <!-- Hover Action Bar -->
+                                <div id="hero-change-overlay"
+                                    class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 via-black/35 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                    <button type="button"
+                                        onclick="openPhotoLightbox(document.getElementById('hero-photo-img').src, 'Birthday Queen — That Pure, Good-Hearted Smile 💖')"
+                                        class="px-3.5 py-1.5 rounded-full bg-white/95 text-deepRose text-xs font-bold shadow-md hover:bg-rose-50 cursor-pointer">
+                                        🔍 Full View
+                                    </button>
+                                    <button type="button" onclick="document.getElementById('hero-photo-input').click()"
+                                        class="px-3.5 py-1.5 rounded-full bg-champagneGold text-white text-xs font-bold shadow-md hover:brightness-105 cursor-pointer">
+                                        🔄 Swap Photo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input id="hero-photo-input" type="file" accept="image/*" class="hidden"
+                            onchange="handleHeroPhotoUpload(this.files)">
+
+                        <!-- Editable Caption Below Hero Portrait -->
+                        <p contenteditable="true"
+                            class="mt-4 font-script text-2xl sm:text-3xl text-deepRose text-center px-2">
+                            “Birthday Queen — Prettiest inside & out ✨”
+                        </p>
+                        <span class="text-[11px] text-inkCharcoal/50">Tap photo to view full-screen or swap image</span>
+                    </div>
+
+                    <!-- Right / Bottom: Heartfelt Birthday Letter Paragraphs -->
+                    <div id="letter-body-container"
+                        class="lg:col-span-7 font-serif text-lg sm:text-xl md:text-[1.28rem] leading-relaxed text-inkCharcoal/90 space-y-5">
+                        <p class="letter-paragraph first-letter:text-5xl first-letter:font-script first-letter:text-deepRose first-letter:mr-2 first-letter:float-left"
+                            contenteditable="true">
+                            Happy Birthday to one of the rarest, most wonderful souls this world has ever been blessed
+                            with! Today isn’t just another date on the calendar—it is a celebration of your life, your
+                            warmth, and the light you bring into every single day.
+                        </p>
+
+                        <p class="letter-paragraph" contenteditable="true">
+                            Everyone who knows you can see how <span class="text-deepRose font-semibold italic">truly
+                                pretty</span> you are, with a smile that can soften the heaviest day and eyes full of
+                            genuine warmth. Yet what makes you genuinely unforgettable is how <span
+                                class="text-deepRose font-semibold italic">purely good-hearted and caring</span> you
+                            are.
+                        </p>
+
+                        <p class="letter-paragraph" contenteditable="true">
+                            You have a gift for making people feel safe, heard, and deeply valued. Whether it’s through
+                            your gentle words, your thoughtful little gestures, or the quiet kindness you show without
+                            ever expecting praise, your heart shines brighter than any birthday candle ever could.
+                        </p>
+
+                        <blockquote
+                            class="letter-paragraph my-6 pl-5 border-l-4 border-champagneGold bg-gradient-to-r from-rosePetal to-amber-50/50 py-4 pr-4 rounded-r-2xl italic text-deepRose font-display text-lg sm:text-xl"
+                            contenteditable="true">
+                            “May this new year of your life return to you every ounce of love, kindness, and happiness
+                            that you so effortlessly give to others.”
+                        </blockquote>
+
+                        <p class="letter-paragraph" contenteditable="true">
+                            Never stop being the compassionate, radiant, and deeply caring person you are. Wishing you a
+                            birthday filled with laughter, sweet surprises, and all the love your golden heart deserves.
+                        </p>
+
+                        <!-- Editable Signature -->
+                        <div
+                            class="letter-paragraph pt-6 mt-6 border-t border-amber-200/70 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                            <div>
+                                <p class="font-serif italic text-lg text-inkCharcoal/75">With warmest birthday wishes &
+                                    love,</p>
+                                <p contenteditable="true" class="font-script text-3xl sm:text-4xl text-deepRose mt-1">
+                                    Forever Yours ♥</p>
+                            </div>
+                            <button onclick="launchFireworksAndConfetti(event)"
+                                class="self-start sm:self-auto px-5 py-2.5 rounded-full bg-amber-100/90 hover:bg-amber-200/80 text-amber-900 text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer border border-amber-300 shadow-xs">
+                                <span>🎆</span> Celebrate With Fireworks
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. INTERACTIVE GLOWING BIRTHDAY CAKE -->
+            <section
+                class="bg-white/90 backdrop-blur-md rounded-3xl p-7 sm:p-12 border border-amber-200/90 shadow-[0_20px_50px_rgba(158,63,82,0.12)] text-center space-y-6 relative overflow-hidden">
+                <div class="max-w-xl mx-auto space-y-2">
+                    <span class="text-xs uppercase tracking-[0.25em] text-champagneGold font-bold">Interactive Birthday
+                        Ritual</span>
+                    <h3 class="font-display text-3xl sm:text-4xl font-bold text-deepRose">Make a Wish, Dear Honey!</h3>
+                    <p id="wish-instruction" class="font-serif italic text-lg text-inkCharcoal/75">
+                        Close your eyes, make a sweet birthday wish, and tap the button (or candles) to blow them out!
+                    </p>
+                </div>
+
+                <!-- Custom Illustrated Interactive Birthday Cake (Inline SVG) -->
+                <div class="relative mx-auto w-64 sm:w-72 pt-4 pb-2 cursor-pointer select-none"
+                    onclick="blowOutCandles(event)" title="Tap to blow out the candles!">
+                    <svg viewBox="0 0 260 220" class="w-full h-auto drop-shadow-md">
+                        <ellipse cx="130" cy="198" rx="115" ry="14" fill="#f3e5d8" stroke="#d4b499" stroke-width="2" />
+                        <ellipse cx="130" cy="195" rx="102" ry="10" fill="#fffaf5" />
+
+                        <!-- Bottom Cake Tier -->
+                        <rect x="45" y="138" width="170" height="55" rx="14" fill="#f7b2bd" />
+                        <path
+                            d="M45,152 Q66,166 87,152 T130,152 T172,152 T215,152 L215,138 Q215,126 201,126 L59,126 Q45,126 45,138 Z"
+                            fill="#fffdf9" />
+                        <circle cx="65" cy="175" r="3.5" fill="#e5b96f" />
+                        <circle cx="97" cy="175" r="3.5" fill="#e5b96f" />
+                        <circle cx="130" cy="175" r="3.5" fill="#e5b96f" />
+                        <circle cx="163" cy="175" r="3.5" fill="#e5b96f" />
+                        <circle cx="195" cy="175" r="3.5" fill="#e5b96f" />
+
+                        <!-- Top Cake Tier -->
+                        <rect x="70" y="88" width="120" height="46" rx="12" fill="#f28b9c" />
+                        <path d="M70,100 Q90,113 110,100 T150,100 T190,100 L190,88 Q190,78 178,78 L82,78 Q70,78 70,88 Z"
+                            fill="#fff7f7" />
+
+                        <!-- Three Birthday Candles -->
+                        <rect x="92" y="46" width="8" height="32" rx="3" fill="#fff3d6" stroke="#e5b96f"
+                            stroke-width="1" />
+                        <line x1="96" y1="41" x2="96" y2="46" stroke="#4a3b32" stroke-width="1.5" />
+                        <rect x="126" y="40" width="8" height="38" rx="3" fill="#ffe0e6" stroke="#d88c9a"
+                            stroke-width="1" />
+                        <line x1="130" y1="35" x2="130" y2="40" stroke="#4a3b32" stroke-width="1.5" />
+                        <rect x="160" y="46" width="8" height="32" rx="3" fill="#fff3d6" stroke="#e5b96f"
+                            stroke-width="1" />
+                        <line x1="164" y1="41" x2="164" y2="46" stroke="#4a3b32" stroke-width="1.5" />
+
+                        <!-- Glowing Flames -->
+                        <g id="cake-flames">
+                            <path class="candle-flame" d="M96,22 C102,30 102,38 96,41 C90,38 90,30 96,22 Z"
+                                fill="#ff9f1c" />
+                            <path class="candle-flame" d="M96,28 C99,32 99,37 96,39 C93,37 93,32 96,28 Z"
+                                fill="#fff3b0" />
+                            <path class="candle-flame" d="M130,15 C137,24 137,32 130,35 C123,32 123,24 130,15 Z"
+                                fill="#ff9f1c" />
+                            <path class="candle-flame" d="M130,21 C133,26 133,31 130,33 C127,31 127,26 130,21 Z"
+                                fill="#fff3b0" />
+                            <path class="candle-flame" d="M164,22 C170,30 170,38 164,41 C158,38 158,30 164,22 Z"
+                                fill="#ff9f1c" />
+                            <path class="candle-flame" d="M164,28 C167,32 167,37 164,39 C161,37 161,32 164,28 Z"
+                                fill="#fff3b0" />
+                        </g>
+
+                        <!-- Smoke Puffs Container -->
+                        <g id="cake-smoke" class="hidden">
+                            <circle cx="96" cy="34" r="4" fill="#cbd5e1" class="smoke-puff" />
+                            <circle cx="130" cy="28" r="5" fill="#cbd5e1" class="smoke-puff" />
+                            <circle cx="164" cy="34" r="4" fill="#cbd5e1" class="smoke-puff" />
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Interactive Cake Action Button -->
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button id="blow-candles-btn" onclick="blowOutCandles(event)"
+                        class="px-7 py-3.5 rounded-full bg-gradient-to-r from-deepRose to-[#c7566b] hover:from-[#873243] hover:to-deepRose text-white font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all cursor-pointer flex items-center gap-2">
+                        <span>🌬️</span>
+                        <span id="candle-btn-label">Make a Wish & Blow Out Candles</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 3. INTERACTIVE BIRTHDAY GALLERY -->
+            <section
+                class="stationery-paper rounded-3xl p-6 sm:p-10 md:p-12 shadow-[0_20px_55px_rgba(158,63,82,0.13)] border border-amber-200/90 space-y-8">
+                <div
+                    class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-amber-200/80 pb-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.25em] text-champagneGold font-bold">Cherished Smiles
+                            & Memories</span>
+                        <h3 class="font-display text-3xl sm:text-4xl font-bold text-deepRose mt-1">Honey’s Birthday
+                            Photo Gallery</h3>
+                        <p class="text-sm text-inkCharcoal/75 mt-1">Tap any photo to view full-screen, click any caption
+                            to edit your note, or add even more memories below.</p>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <label for="gallery-upload-input"
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-champagneGold to-[#b58445] hover:from-[#b58445] hover:to-champagneGold text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all cursor-pointer">
+                            <span>📸</span>
+                            <span>Add Her Photos</span>
+                        </label>
+                        <input id="gallery-upload-input" type="file" accept="image/*" multiple class="hidden"
+                            onchange="handleGalleryUpload(this.files)">
+                    </div>
+                </div>
+
+                <!-- Drag-and-Drop Photo Dropzone -->
+                <div id="gallery-dropzone" onclick="document.getElementById('gallery-upload-input').click()"
+                    class="border-2 border-dashed border-amber-300 hover:border-deepRose bg-rosePetal/60 hover:bg-blushSoft/70 rounded-2xl p-6 text-center transition-all cursor-pointer">
+                    <div class="flex flex-col items-center justify-center gap-1.5">
+                        <span class="text-3xl">🖼️</span>
+                        <p class="font-display text-lg sm:text-xl font-bold text-deepRose">Drag & drop Honey’s photos
+                            here</p>
+                        <p class="text-xs text-inkCharcoal/65">or tap anywhere inside this box to select pictures from
+                            your phone or computer</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid & Golden Frame Gallery Grid -->
+                <div id="birthday-polaroid-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 pt-2">
+                </div>
+            </section>
+
+            <!-- 4. FINALE: SEND BIRTHDAY WISHES & WARM HUG BURST -->
+            <section
+                class="text-center bg-gradient-to-br from-white via-[#fff8f8] to-[#fdf3e7] rounded-3xl p-8 sm:p-12 border border-amber-200/90 shadow-xl space-y-5">
+                <span class="inline-block text-4xl animate-bounce">🎁</span>
+                <h3 class="font-script text-4xl sm:text-5xl text-deepRose">Wishing You Endless Joy, Honey</h3>
+                <p class="font-serif text-lg sm:text-xl text-inkCharcoal/80 max-w-xl mx-auto">
+                    Thank you for being such a genuine, pretty, and good-hearted person. Tap below to shower this page
+                    with birthday love and hugs!
+                </p>
+
+                <div class="pt-2">
+                    <button onclick="sendBirthdayHugBurst(event)"
+                        class="px-8 py-4 rounded-full bg-gradient-to-r from-deepRose via-[#be4d63] to-champagneGold text-white font-semibold text-base shadow-[0_12px_30px_rgba(158,63,82,0.35)] hover:shadow-[0_16px_36px_rgba(158,63,82,0.48)] transform hover:-translate-y-0.5 transition-all cursor-pointer inline-flex items-center gap-2.5">
+                        <span>🤗</span>
+                        <span>Send Birthday Wishes & Warm Hug</span>
+                    </button>
+                </div>
+
+                <p class="text-xs font-semibold text-deepRose/80">
+                    Birthday hugs & wishes sent: <span id="wishes-counter" class="text-base font-bold">1</span> 💖
+                </p>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Full-Screen Photo Lightbox Modal -->
+    <div id="photo-lightbox-modal" onclick="closePhotoLightbox(event)"
+        class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-8">
+        <div class="relative max-w-2xl w-full bg-warmPaper rounded-3xl p-3 sm:p-5 shadow-2xl border-2 border-amber-300/80 flex flex-col items-center"
+            onclick="event.stopPropagation()">
+            <button type="button" onclick="closePhotoLightbox()" aria-label="Close full-screen photo"
+                class="absolute -top-3.5 -right-3.5 w-10 h-10 rounded-full bg-deepRose text-white font-bold shadow-lg hover:bg-[#873243] flex items-center justify-center cursor-pointer border-2 border-white">
+                ✕
+            </button>
+            <div class="w-full max-h-[75vh] overflow-hidden rounded-2xl bg-black/5 flex items-center justify-center">
+                <img id="lightbox-img" src="" alt="Honey Birthday Memory"
+                    class="max-h-[75vh] w-auto object-contain rounded-xl">
+            </div>
+            <p id="lightbox-caption" class="font-script text-2xl sm:text-3xl text-deepRose text-center mt-3 px-2"></p>
+        </div>
+    </div>
+
+    <!-- Linked External JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
